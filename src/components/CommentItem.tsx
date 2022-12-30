@@ -1,11 +1,12 @@
 import Comment from '../types/Comment';
-
 import React from 'react';
 import { Card, CardContent, makeStyles, Typography } from '@material-ui/core';
+import Stack from '@mui/material/Stack';
+import AvatarUserTimeTags from './AvatarUserTimeTags';
+import DeleteEditComment from './DeleteEditComment';
 
 type Props = {
     comment: Comment;
-    styled: boolean;
 };
 
 const useStyles = makeStyles({
@@ -22,32 +23,21 @@ const useStyles = makeStyles({
     },
 });
 
-const CommentItem: React.FC<Props> = ({ comment, styled }) => {
+const CommentItem: React.FC<Props> = ({ comment }: Props) => {
     const classes = useStyles();
-
-    if (styled) {
         return (
             <Card className={classes.commentCard}>
                 <CardContent>
-                    <Typography variant="body2" color="textPrimary" className={classes.commentBody} component="p">
-                        {comment.body}
-                    </Typography>
-                    <Typography color="textSecondary" className={classes.metadata} gutterBottom>
-                        {'Posted by ' + comment.author + ' on ' + comment.timestamp.toLocaleString()}
-                    </Typography>
+                    <Stack direction='column' spacing={3}>
+                        <AvatarUserTimeTags tagged={false} user={"user"} time={new Date(comment.created_at)}/>
+                        <Typography align='left' variant="body1">            
+                            {comment.body}
+                        </Typography>
+                        <DeleteEditComment commentable={false} />
+                    </Stack>
                 </CardContent>
             </Card>
         );
-    }
-
-    // unstyled
-    return (
-        <li className={classes.commentBody}>
-            {comment.body}
-            <br />
-            <em>{'posted by ' + comment.author + ' on ' + comment.timestamp.toLocaleString()}</em>
-        </li>
-    );
 };
 
 export default CommentItem;

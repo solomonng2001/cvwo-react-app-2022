@@ -44,3 +44,8 @@ li {
 ul {
     padding-inline-start: unset;
 }
+
+.Thread-Header {
+    border-bottom: 1px solid;
+    padding-bottom: 3px;
+}
