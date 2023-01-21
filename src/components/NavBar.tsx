@@ -1,15 +1,20 @@
-import { Typography, Box, AppBar, Container, Toolbar, CardActionArea, Tooltip,
-  IconButton, Avatar } from '@material-ui/core';
+import { Typography, Box, AppBar, Container, Toolbar, Tooltip,
+  IconButton, Avatar, CardActionArea } from '@material-ui/core';
 import ForumIcon from '@mui/icons-material/Forum';
-import Stack from '@mui/material/Stack';
 import AccountSettings from './AccountSettings';
+import CurrentUserState from '../types/CurrentUserState';
+import GlobalMessageState from '../types/GlobalMessageState';
+import Stack from '@mui/material/Stack';
 
 import React from 'react';
 
-const pages = ['MyThreads', 'MyComments']
-const settings = ['Profile', 'Account', 'Logout', 'Sign In'];
+type Props = {
+  currentUserState: CurrentUserState;
+  globalMessageState: GlobalMessageState;
+  API: string;
+}
 
-const NavBar: React.FC = () => {
+const NavBar: React.FC<Props> = ({API, currentUserState, globalMessageState}: Props) => {
   const [anchorElAccountSettings, setAnchorElAccountSettings] = React.useState<null | HTMLElement>(null);
   const openAccountSettings = Boolean(anchorElAccountSettings);
   const handleClickAccountSettings = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -18,6 +23,16 @@ const NavBar: React.FC = () => {
   const handleCloseAccountSettings = () => {
     setAnchorElAccountSettings(null);
   };
+
+  type page = {
+    pageName: string;
+    href: string;
+  }
+  const myThreads: page = {
+    pageName: "MyThreads",
+    href: "/mythreads",
+  }
+  const pages:page[] = [myThreads];
 
   return (
     <Box marginBottom={'70px'}>
@@ -36,9 +51,9 @@ const NavBar: React.FC = () => {
                 ChitChat
               </Typography>
               <Stack direction='row'>
-                {pages.map(page => (
-                  <CardActionArea key={page} style={{padding: '10px', borderRadius: '10px'}} href='/'>
-                    <Typography>{page}</Typography>
+                {currentUserState.isLoggedIn && pages.map(page => (
+                  <CardActionArea key={page.pageName} style={{padding: '10px', borderRadius: '10px'}} href={page.href}>
+                    <Typography>{page.pageName}</Typography>
                   </CardActionArea>
                 ))}
               </Stack>
@@ -51,10 +66,11 @@ const NavBar: React.FC = () => {
                 aria-expanded={openAccountSettings ? 'true' : undefined}
                 onClick={handleClickAccountSettings}
               >
-                <Avatar alt="Remy Sharp" />
+                <Avatar/>
               </IconButton>
             </Tooltip>
-            <AccountSettings anchorElAccountSettings={anchorElAccountSettings} openAccountSettings={openAccountSettings} handleCloseAccountSettings={handleCloseAccountSettings} />
+            <AccountSettings API={API} anchorElAccountSettings={anchorElAccountSettings} openAccountSettings={openAccountSettings} 
+              handleCloseAccountSettings={handleCloseAccountSettings} currentUserState={currentUserState} globalMessageState={globalMessageState}/>
           </Toolbar>
         </Container>
       </AppBar>

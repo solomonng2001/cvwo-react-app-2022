@@ -1,37 +1,22 @@
 import '../App.css';
 import ThreadMainPost from './ThreadMainPost';
 import Stack from '@mui/material/Stack';
-import Thread from '../types/Thread';
+import { Thread } from '../types/Thread';
+import CurrentUserState from '../types/CurrentUserState';
+import GlobalMessageState from '../types/GlobalMessageState';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-const ThreadList: React.FC = () => {
+type Props = {
+    threads: Thread[];
+    currentUserState: CurrentUserState;
+    error: any;
+    isLoaded: boolean;
+    API: string;
+    globalMessageState: GlobalMessageState;
+}
 
-    const [error, setError] = useState<any>(null);
-    const [isLoaded, setIsLoaded] = useState<boolean>(false);
-    const [threads, setThreads] = useState<Thread[]>([]);
-
-    useEffect(() => {
-        fetch("http://localhost:3000/thread_pages", {
-            method: 'GET',
-            mode: 'cors'
-        })
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded(true);
-                    setThreads(result);
-                },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            )
-    }, [])
-    
+const ThreadList: React.FC<Props> = ({ API, threads, error, isLoaded, currentUserState, globalMessageState }: Props) => {
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -41,8 +26,8 @@ const ThreadList: React.FC = () => {
             <div style={{ width: '50vw', margin: 'auto', textAlign: 'center' }}>
                 <Stack spacing={2}>
                     { threads.map(thread => (
-                        <ThreadMainPost toOverflow={true} thread={thread} key={thread.id}/>
-                    )) }
+                        <ThreadMainPost globalMessageState={globalMessageState} API={API} toOverflow={true} thread={thread} key={thread.id} currentUserState={currentUserState}/>
+                    ))}
                 </Stack>
             </div>
         );

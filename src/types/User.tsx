@@ -1,7 +1,7 @@
 import React from 'react';
 
-type user = {
-    user: string;
+type User = {
+    username: string;
 };
 
-export default user;
+export default User;

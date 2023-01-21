@@ -1,16 +1,30 @@
-import React from 'react';
 import Comment from './Comment';
-import user from './User';
+import User from './User';
 
 type Thread = {
     id: number;
     title: string;
     body: string;
     user_id: number;
+    tags: string;
     created_at: string;
     updated_at: string;
     comments: Comment[];
-    user: user;
+    user: User;
 };
 
-export default Thread;
+const emptyThread: Thread = {
+    id: 0,
+    title: '',
+    body: '',
+    user_id: 0,
+    tags: "",
+    created_at: '',
+    updated_at: '',
+    comments: [],
+    user: {
+        username: '',
+    },
+}
+
+export { type Thread, emptyThread };

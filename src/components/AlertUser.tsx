@@ -4,14 +4,14 @@ import React from 'react';
 
 type Props = {
     severity: AlertColor | undefined;
-    message: string;
+    message: string[];
 }
 
 const AlertUser: React.FC<Props> = ({severity, message}: Props) => {
     return (
         <>
-            { message !== "" &&
-                <Alert severity={severity}>{message}</Alert>
+            { message.map(error =>
+                <Alert severity={severity}>{error}</Alert>)  
             }
         </>
     );

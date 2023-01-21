@@ -1,31 +1,25 @@
-import Thread from '../types/Thread';
+import { Thread, emptyThread } from '../types/Thread';
 import ThreadMainPost from './ThreadMainPost';
 import CommentList from './CommentList';
+import CurrentUserState from '../types/CurrentUserState';
+import GlobalMessageState from '../types/GlobalMessageState';
 
 import React, { useEffect, useState } from 'react';
 
 type Props = {
     threadID: string | undefined;
+    currentUserState: CurrentUserState;
+    API: string,
+    globalMessageState: GlobalMessageState;
 }
 
-const ThreadView: React.FC<Props> = ({threadID}: Props) => {
+const ThreadView: React.FC<Props> = ({threadID, currentUserState, API, globalMessageState}: Props) => {
     const [error, setError] = useState<any>(null);
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
-    const [thread, setThread] = useState<Thread>({
-        id: 0,
-        title: '',
-        body: '',
-        user_id: 0,
-        created_at: '',
-        updated_at: '',
-        comments: [],
-        user: {
-            user: '',
-        },
-    });
+    const [thread, setThread] = useState<Thread>(emptyThread);
 
     useEffect(() => {
-        fetch("http://localhost:3000/thread_pages/" + threadID, {
+        fetch(API + "/thread_pages/" + threadID, {
             method: 'GET',
             mode: 'cors'
         })
@@ -43,7 +37,7 @@ const ThreadView: React.FC<Props> = ({threadID}: Props) => {
                     setError(error);
                 }
             )
-    }, [])
+    }, [threadID, API])
     
     if (error) {
         return <div>Error: {error.message}</div>;
@@ -52,8 +46,8 @@ const ThreadView: React.FC<Props> = ({threadID}: Props) => {
     } else {
         return (
             <>
-                <ThreadMainPost toOverflow={false} thread={thread} key={thread.id}/>
-                <CommentList comments={thread.comments}/>
+                <ThreadMainPost globalMessageState={globalMessageState} API={API} toOverflow={false} thread={thread} key={thread.id} currentUserState={currentUserState}/>
+                <CommentList API={API} comments={thread.comments} currentUserState={currentUserState}/>
             </>
         );
     }
