@@ -10,7 +10,7 @@ import GlobalMessage from './components/GlobalMessage';
 import { AlertColor } from '@mui/material/Alert';
 import MyThreads from './pages/MyThreads';
 
-const API: string = "http://localhost:3000/";
+const API: string = "https://chitchat-33jh.onrender.com";
 
 const theme = createTheme({
     palette: {
