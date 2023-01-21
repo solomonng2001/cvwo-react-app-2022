@@ -10,7 +10,7 @@ import GlobalMessage from './components/GlobalMessage';
 import { AlertColor } from '@mui/material/Alert';
 import MyThreads from './pages/MyThreads';
 
-const API: string = "postgres://chitchat_user:MRg0w5MXWBNK4OoCwswR8LUjG18B68It@dpg-cf5udt4gqg47vk6lsp7g-a.singapore-postgres.render.com/chitchat";
+const API: string = "https://chitchat-33jh.onrender.com/";
 
 const theme = createTheme({
     palette: {
