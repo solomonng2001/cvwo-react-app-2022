@@ -19,7 +19,7 @@ type Props = {
 const ThreadPost: React.FC<Props> = ( {API, toOverflow, thread, currentUserState, globalMessageState}: Props) => {
     return (
         <Card>
-            <CardActionArea style={{ padding: '20px' }} href={'/thread_pages/' + thread.id}>
+            <CardActionArea style={{ padding: '20px' }} href={'/thread/' + thread.id}>
                 <Typography variant='h4' align='left'>
                     {thread.title}
                 </Typography>
