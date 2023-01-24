@@ -10,6 +10,7 @@ type Props = {
     openGlobalMessage: boolean;
 }
 
+// display global message to whatever page cureent user is viewing from (message on bottom left corner and lasts 6 seconds)
 const GlobalMessage: React.FC<Props> = ({globalMessage, severityGlobalMessage, handleCloseGlobalMessage, openGlobalMessage}: Props) => {
 
     return (

@@ -30,6 +30,8 @@ const theme = createTheme({
   });
 
 const App: React.FC = () => {
+
+  // Global Message: to display messages at user's current page location
   const [globalMessage, setGlobalMessage] = useState<string[]>([]);
   const [severityGlobalMessage, setSeverityGlobalMessage] = useState<AlertColor | undefined>(undefined);
   const [openGlobalMessage, setOpenGlobalMessage] = useState<boolean>(true);
@@ -47,6 +49,7 @@ const App: React.FC = () => {
     handleOpenGlobalMessage: handleOpenGlobalMessage,
   }
 
+  // Current User: cache user login information
   const emptyCurrentUser = {
     id: 0,
     username: "",
@@ -62,6 +65,7 @@ const App: React.FC = () => {
     isLoggedIn: currentUser.id !== 0,
   }
 
+  // Checks with backend that user is logged in whenver page is loaded
   useEffect(() => {
     let new_message: string[] = [];
     const token = localStorage.getItem("token")
@@ -89,12 +93,17 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
+          {/* Navigation bar menu: contains home button, my threads button and account settings dropdown menu (accessible on all pages)*/}
           <NavBar API={API} currentUserState={currentUserState} globalMessageState={globalMessageState}/>
+          {/* Global Message element: display messages at user's current page location */}
           < GlobalMessage globalMessage={globalMessage} severityGlobalMessage={severityGlobalMessage} openGlobalMessage={openGlobalMessage} handleCloseGlobalMessage={handleCloseGlobalMessage}/>
           <BrowserRouter>
             <Routes>
+                {/* View individual thread and associated comments */}
                 <Route path="/thread/:threadID" element={<ThreadPage globalMessageState={globalMessageState} currentUserState={currentUserState} API={API}/>} />
+                {/* Home root page */}
                 <Route path="/" element={<Home globalMessageState={globalMessageState} currentUserState={currentUserState} API={API}/>} />
+                {/* View all threads created by current user (must be logged in) */}
                 <Route path="/mythreads" element={<MyThreads globalMessageState={globalMessageState} currentUserState={currentUserState} API={API}/>} />
             </Routes>
          </BrowserRouter>

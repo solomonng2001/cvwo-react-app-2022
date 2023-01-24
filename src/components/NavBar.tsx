@@ -1,7 +1,7 @@
 import { Typography, Box, AppBar, Container, Toolbar, Tooltip,
   IconButton, Avatar, CardActionArea } from '@material-ui/core';
 import ForumIcon from '@mui/icons-material/Forum';
-import AccountSettings from './AccountSettings';
+import AccountSettings from './account/AccountSettings';
 import CurrentUserState from '../types/CurrentUserState';
 import GlobalMessageState from '../types/GlobalMessageState';
 import Stack from '@mui/material/Stack';
@@ -14,7 +14,10 @@ type Props = {
   API: string;
 }
 
+// Navigation bar menu: contains home button, my threads button and account settings dropdown menu (accessible on all pages)
 const NavBar: React.FC<Props> = ({API, currentUserState, globalMessageState}: Props) => {
+
+  // Anchor settings menu (dropdown menu: contains log in, log out and creaete account buttons)
   const [anchorElAccountSettings, setAnchorElAccountSettings] = React.useState<null | HTMLElement>(null);
   const openAccountSettings = Boolean(anchorElAccountSettings);
   const handleClickAccountSettings = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -24,6 +27,7 @@ const NavBar: React.FC<Props> = ({API, currentUserState, globalMessageState}: Pr
     setAnchorElAccountSettings(null);
   };
 
+  // Other buttons on navbar that redirect to other pages (other than "home" and "account settings" buttons)
   type page = {
     pageName: string;
     href: string;
@@ -40,6 +44,7 @@ const NavBar: React.FC<Props> = ({API, currentUserState, globalMessageState}: Pr
         <Container maxWidth='xl'>
           <Toolbar disableGutters>
             <Box flexGrow={1} display='flex' alignItems={'center'}>
+              {/* Logo and website name */}
               <ForumIcon sx={{mr: 1}} />
               <Typography variant='h6' component='a' href='/'
                 style={{
@@ -51,6 +56,7 @@ const NavBar: React.FC<Props> = ({API, currentUserState, globalMessageState}: Pr
                 ChitChat
               </Typography>
               <Stack direction='row'>
+                {/* Other buttons redirecting to other pages */}
                 {currentUserState.isLoggedIn && pages.map(page => (
                   <CardActionArea key={page.pageName} style={{padding: '10px', borderRadius: '10px'}} href={page.href}>
                     <Typography>{page.pageName}</Typography>
@@ -58,6 +64,7 @@ const NavBar: React.FC<Props> = ({API, currentUserState, globalMessageState}: Pr
                 ))}
               </Stack>
             </Box>
+            {/* Account settings button with dropdown menu containing login, logout, change password and create account */}
             <Tooltip title="Account Settings">
               <IconButton
                 id="basic-button"

@@ -7,6 +7,7 @@ type Props = {
     message: string[];
 }
 
+// display success/error messages to user from array of messages (displayed in dialog pages, different from global messages)
 const AlertUser: React.FC<Props> = ({severity, message}: Props) => {
     return (
         <>

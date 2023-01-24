@@ -9,8 +9,11 @@ type Props = {
 }
 
 const BodyAddHTML: React.FC<Props> = ({ body, toOverflow }: Props) => {
+    
+    // parse body string obtained from backend, and convert into array of tags string, with "next line" property handled
     const body_array: string[] = body.split('\n').filter(ele => ele !== "");
 
+    // if text to be fully displayed (threads in individual ThreadView page)
     if (!toOverflow) {
         return (
             <Stack direction='column' spacing={0}>
@@ -26,6 +29,7 @@ const BodyAddHTML: React.FC<Props> = ({ body, toOverflow }: Props) => {
         );
     }
 
+    // if text-overflow: "..." to summarize text and keep text short (threads list view eg. homepage and mythreads page)
     const body_elipsis = body_array.join('...');
     return (
         <Typography noWrap={toOverflow} align='left' variant="body1">

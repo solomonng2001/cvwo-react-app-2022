@@ -1,4 +1,4 @@
-import ThreadList from '../components/ThreadList';
+import ThreadList from '../components/thread/ThreadList';
 import { Typography } from '@material-ui/core';
 import Typewriter from 'typewriter-effect';
 import SearchBar from '../components/SearchBar';

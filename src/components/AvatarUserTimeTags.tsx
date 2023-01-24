@@ -11,9 +11,13 @@ type Props = {
     tags: string;
 };
 
+// layout of user avatar, username, datae and time, and tags
 const AvatarUserTimeTags: React.FC<Props> = ({ tagged, user, time, tags }: Props) => {
+
+    // if tags to be displayed (for threads)
     if (tagged) {
-        const tagsArray= tags.split(",");
+        // empty array if tags is empty (so that tags array will not display empty chip)
+        const tagsArray= tags === "" ? [] : tags.split(",");
         return (
             <Grid container>
                 <Grid item xs={6}>
@@ -36,7 +40,7 @@ const AvatarUserTimeTags: React.FC<Props> = ({ tagged, user, time, tags }: Props
         );
     }
 
-    // Without tags
+    // Without tags (for comments)
     return (
         <Grid container>
             <Grid item xs={6}>

@@ -1,4 +1,4 @@
-import ThreadView from '../components/ThreadView';
+import ThreadView from '../components/thread/ThreadView';
 import { useParams } from "react-router-dom";
 import CurrentUserState from '../types/CurrentUserState';
 import GlobalMessageState from '../types/GlobalMessageState';
