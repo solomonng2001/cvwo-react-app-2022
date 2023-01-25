@@ -68,7 +68,7 @@ const UpdateComment: React.FC<Props> = ({API, openUpdateComment, handleCloseUpda
     // Dialog page contains "body" text field, and "cancel" and "edit comment" (submit changes) buttons
     return (
         <Dialog open={openUpdateComment} onClose={handleCloseUpdateComment} fullWidth>
-            <DialogTitle>What's on your mind?</DialogTitle>
+            <DialogTitle>Edit Comment</DialogTitle>
             <DialogContent>
                 {/* Display success/error messages */}
                 <AlertUser severity={severity} message={message}/>

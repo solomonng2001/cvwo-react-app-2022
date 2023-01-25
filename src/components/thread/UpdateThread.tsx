@@ -84,7 +84,7 @@ const UpdateThread: React.FC<Props> = ({API, openUpdateThread, handleCloseUpdate
     // Dialog page contains "title" and "body" text fields, and "close" and "edit thread" (submit changes) buttons
     return (
         <Dialog open={openUpdateThread} onClose={handleCloseUpdateThread} fullWidth>
-            <DialogTitle>What's on your mind?</DialogTitle>
+            <DialogTitle>Edit Thread</DialogTitle>
             <DialogContent>
                 {/* Display success/error messages */}
                 <AlertUser severity={severity} message={message}/>
@@ -130,7 +130,7 @@ const UpdateThread: React.FC<Props> = ({API, openUpdateThread, handleCloseUpdate
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleCloseUpdateThread}>Cancel</Button>
-                <Button onClick={handleSubmitUpdateThread}>Edit Thread</Button>
+                <Button onClick={handleSubmitUpdateThread}>Save changes</Button>
             </DialogActions>
         </Dialog>
     );
