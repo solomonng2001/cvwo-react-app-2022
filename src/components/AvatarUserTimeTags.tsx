@@ -17,7 +17,7 @@ const AvatarUserTimeTags: React.FC<Props> = ({ tagged, user, time, tags }: Props
     // if tags to be displayed (for threads)
     if (tagged) {
         // empty array if tags is empty (so that tags array will not display empty chip)
-        const tagsArray= tags === "" ? [] : tags.split(",");
+        const tagsArray = tags === "" ? [] : tags.split(",");
         return (
             <Grid container>
                 <Grid item xs={6}>

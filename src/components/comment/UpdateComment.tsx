@@ -15,7 +15,7 @@ type Props = {
 
 // Edit comment dialog (visible by creator and when creator is logged in)
 const UpdateComment: React.FC<Props> = ({API, openUpdateComment, handleCloseUpdateComment, comment}: Props) => {
-    const [body, setBody] = useState<string>("");
+    const [body, setBody] = useState<string>(comment.body);
     const [severity, setSeverity] = useState<AlertColor | undefined>(undefined);
     const [message, setMessage] = useState<string[]>([]);
     
@@ -85,7 +85,7 @@ const UpdateComment: React.FC<Props> = ({API, openUpdateComment, handleCloseUpda
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleCloseUpdateComment}>Cancel</Button>
-                <Button onClick={handleSubmitUpdateComment}>Edit Comment</Button>
+                <Button onClick={handleSubmitUpdateComment}>Save Changes</Button>
             </DialogActions>
         </Dialog>
     );

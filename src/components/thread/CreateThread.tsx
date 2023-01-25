@@ -18,7 +18,7 @@ type Props = {
 const CreateThread: React.FC<Props> = ({API, openCreateThread, handleCloseCreateThread, currentUserState }: Props) => {
     const [title, setTitle] = useState<string>("");
     const [body, setBody] = useState<string>("");
-    const [tagsInput, setTagsInput] = useState<string>(""); // tags string directly from user input
+    const [tagsInput, setTagsInput] = useState<string>("#"); // tags string directly from user input
     const [tagsArray, setTagsArray] = useState<string[]>([]); // tags parsed into arrays
     const [severity, setSeverity] = useState<AlertColor | undefined>(undefined);
     const [message, setMessage] = useState<string[]>([]);

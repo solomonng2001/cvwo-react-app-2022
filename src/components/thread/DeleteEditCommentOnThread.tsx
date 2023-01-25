@@ -69,7 +69,7 @@ const DeleteEditCommentOnThread: React.FC<Props> = ({ API, currentUserState, thr
                 <IconButton onClick={handleClickOpenUpdateThread}>
                   <EditIcon />
                 </IconButton>
-                <UpdateThread API={API} thread_page_id={thread.id} openUpdateThread={openUpdateThread} handleCloseUpdateThread={handleCloseUpdateThread} />
+                <UpdateThread API={API} thread={thread} openUpdateThread={openUpdateThread} handleCloseUpdateThread={handleCloseUpdateThread} />
               </>
             }
             { thread.user_id === currentUserState.currentUser.id &&
