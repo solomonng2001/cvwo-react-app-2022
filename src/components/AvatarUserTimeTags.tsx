@@ -30,8 +30,8 @@ const AvatarUserTimeTags: React.FC<Props> = ({ tagged, user, time, tags }: Props
                     </Stack>
                 </Grid>
                 <Grid item container xs={6} direction='row' spacing={1} justifyContent='flex-end' alignItems='flex-start'>
-                    { tagsArray.map(tag =>
-                        <Grid item key={tag}>
+                    { tagsArray.map((tag, index) =>
+                        <Grid item key={index}>
                             <Chip label={tag} />
                         </Grid>
                     )}

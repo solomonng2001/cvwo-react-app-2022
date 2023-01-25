@@ -109,8 +109,8 @@ const CreateThread: React.FC<Props> = ({API, openCreateThread, handleCloseCreate
                 />
                 {/* display tags for user to view how tags will look like on thread */}
                 <Grid container direction='row' spacing={1} justifyContent='flex-start' alignItems='flex-start'>
-                    { tagsArray.length > 0 && tagsArray.map(tag =>
-                        <Grid item>
+                    { tagsArray.length > 0 && tagsArray.map((tag, index) =>
+                        <Grid item key={index}>
                             <Chip label={tag}/>
                         </Grid>
                     )}
